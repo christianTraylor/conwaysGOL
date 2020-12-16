@@ -1,24 +1,36 @@
-import tkinter as tk
+import PyQt5.QtWidgets as qtw
+import PyQt5.QtCore as qtc
+import conway
 
-class Window(tk.Frame):
-    def __init__(self, master=None):
-        super().__init__(master)
-        self.pack()
-        self.master = master
-    # def create_widgets(self):
-    #     self.hi_there = tk.Button(self)
-    #     self.hi_there["text"] = "Hello World\n(click me)"
-    #     self.hi_there["command"] = self.say_hi
-    #     self.hi_there.pack(side="top")
+class MainWindow(qtw.QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setMinimumSize(qtc.QSize(320, 140))  
+        self.setWindowTitle("Conway's Game of Life")
+        self.setLayout(qtw.QVBoxLayout())
+        self.start()
 
-    #     self.quit = tk.Button(self, text="QUIT", fg="red",
-    #                           command=self.master.destroy)
-    #     self.quit.pack(side="bottom")
+        self.show()
+    
+    def start(self):
+        self.cells = qtw.QLineEdit()
+        #self.cells.text
+        startBtn = qtw.QPushButton("Start", self)
+        self.layout().addWidget(self.cells)
+        self.layout().addWidget(startBtn)
+        startBtn.clicked.connect(self.driver)
+    
+    def driver(self):
+        try:
+            self.inita = int(self.cells.text())
+        except ValueError:
+            print("Please enter an integer")
+        
 
-    # def say_hi(self):
-    #     print("hi there, everyone!")s
-root = tk.Tk()
-root.geometry("500x500")
-app = Window(master=root)
-app.mainloop()
 
+
+
+app = qtw.QApplication([])
+mw = MainWindow()
+app.setStyle(qtw.QStyleFactory.create('Fusion'))
+app.exec_()
