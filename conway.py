@@ -6,8 +6,6 @@ class Cell():
         self.row = row
         self.col = col
         self.status = status
-        self.false = 0
-        self.true = 0
 
     def check(self, board):
         count = 0
