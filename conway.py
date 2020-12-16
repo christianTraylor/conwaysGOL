@@ -7,7 +7,7 @@ class Cell():
         self.col = col
         self.status = status
 
-    def check(self, board):
+    def check(self, board, x):
         count = 0
         possibilities = (
             (self.row-1,self.col-1), (self.row-1,self.col), (self.row-1,self.col+1), (self.row,self.col-1), 
@@ -15,7 +15,7 @@ class Cell():
         )
         if self.status:
             for cord in possibilities:
-                if (cord[0] < 10) and (cord[1] < 10) and (cord[0] > -1) and (cord[1] > -1):
+                if (cord[0] < x) and (cord[1] < x) and (cord[0] > -1) and (cord[1] > -1):
                     if board[cord[0]][cord[1]].status == True:
                         count+=1
             if count == 2 or  count == 3:
@@ -24,7 +24,7 @@ class Cell():
                 return self.row,self.col,False
         else:
             for cord in possibilities:
-                if (cord[0] < 10) and (cord[1] < 10) and (cord[0] > -1) and (cord[1] > -1):
+                if (cord[0] < x) and (cord[1] < x) and (cord[0] > -1) and (cord[1] > -1):
                     if board[cord[0]][cord[1]].status == True:
                         count+=1
             if count == 3:
@@ -60,7 +60,7 @@ class Board():
         tempBoard = np.zeros((self.x,self.y), dtype=Cell)
         for row in self.board:
             for col in range(len(row)):
-                rowPos, colPos, status = row[col].check(self.board)
+                rowPos, colPos, status = row[col].check(self.board,self.x)
                 tempBoard[rowPos][colPos] = Cell(rowPos,colPos,status)
         del self.board
         self.board = tempBoard
