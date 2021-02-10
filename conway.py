@@ -52,9 +52,9 @@ class Board():
             columnArr = np.random.randint(0,high=self.y,size=2)
             for y in range(self.y):
                 if y in columnArr:
-                    self.board[x][y] = Cell(x,y,True)
+                    self.board[x][y] = Cell(x,y,True) # change
                 else:
-                    self.board[x][y] = Cell(x,y,False)
+                    self.board[x][y] = Cell(x,y,False) # self.board[x][y].static member.. instead of creating new object
 
     def checkCells(self):
         tempBoard = np.zeros((self.x,self.y), dtype=Cell)
