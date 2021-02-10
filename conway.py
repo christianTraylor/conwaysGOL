@@ -62,7 +62,6 @@ class Board():
             for col in range(len(row)):
                 rowPos, colPos, status = row[col].check(self.board,self.x)
                 tempBoard[rowPos][colPos] = Cell(rowPos,colPos,status)
-        del self.board
         self.board = tempBoard
 
     def __repr__(self):
